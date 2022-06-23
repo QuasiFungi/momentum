@@ -1,0 +1,35 @@
+Animating an Object in Unity:
+1. In Unity
+2. Select the Armature Object
+3. Open the "Animation" Window
+4. Click the "Create" Button
+5. Navigate to the Folder that will store all Animations
+6. Name the Animation Clip file "objectName-animationName", for consistency, and Save
+7. Add in the Animation "Keyframes" by your preferred method
+You can enable Recording, and move things around and over the timeline
+Or add each Keyframe manually
+8. Create as many Animation "Clips" as needed
+9. For Animation Clips that should Play once then Stop, Disable the "Loop Time" property
+10. Open the "Animator" Window
+11. Select the Armature Object
+12. Drag all Animation Clips you created for this object into this window to "Import" them
+13. Create State Transitions as needed
+14. For Objects that don't Animate on Game Start,
+Create a new Empty State
+Rename it to Idle
+Set it as Default State
+Add a Transition to the next State
+
+Optional (for Mirrored Animations):
+1. In the Animator Window
+2. Make a duplicate of the Animation Clip
+Rename it
+3. Set the "Playback Speed" to -1
+
+Alternate (for Animations with Physics Collisions):
+1. Make sure each part to be Animated is a separate Object Mesh
+And has only one Armature for all Objects
+Bones should have one Root, and one or more children
+2. In Unity
+3. Add a Primitive Collider such as the Box Collider to each Animated Bone
+Adjust the Collider's dimensions as needed

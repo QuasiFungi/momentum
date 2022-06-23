@@ -1,0 +1,28 @@
+Creating the Texture for a Model:
+1. Select all parts of the Object you want to create a texture for, and switch to "Edit Mode"
+2. Press Shift+C to "Center View on Selection"
+3. Switch to "Edge Select Mode"
+4. Press Ctrl+E then M to "Mark Seams"
+5. Press Shift+LeftClick to "Select/Deselect" Edges
+6. Switch back to "Object Mode"
+7. Create a new "Material", assign it to all the Objects
+8. Rename the Material to "mat_objectName" for consistency
+9. Select all parts of the Object
+10. Switch to the "UV Editing" layout preset
+11. Press U and select "Unwrap"
+12. Optionally, move the UVs around to fit/compress them
+In the "Texture Window", change "Snapping Mode" to "Vertex"
+Enable "Magnet" or Hold Ctrl to Toggle it manually
+Enable "UV Sync" to visualize mesh selection
+Press L to "Select" a mesh that's underneath the Cursor
+Press Ctrl+L to "Select All Parts" of a selected mesh
+Hold Shift after "Grab" to drag slower
+13. Create a new "Image" with blank black background
+14. Rename this Image to "tex_objectName" for consistency
+15. Save the Image in your Unity project Assets folder
+16. Modify the Image in an external Image Editing Software
+Use Alt+R to Reload the Image in Blender's Texture Window for referencing the UVs while editing
+17. Switch to the "Shader" layout preset
+18. Add an "Image Texture" Node, and connect it to "Base Color" field
+19. Set the "Source Image" to your created "tex_objectName" file
+10. Save, and Export the selected Objects in the "FBX" format

@@ -1,0 +1,13 @@
+Switching from Default Rendering Mode to the Universal Rendering Pipeline:
+1. Open the "Package Manager" Window
+2. Search for and Install the "Universal RP" Package
+3. Select "Yes" on the message that pops up after installation, asking you if you want to "Upgrade Project Materials to UniversalRP Materials"
+If this message did not show up, your whole project should appear to be broken, with everything having a pink color in the "Scene" Window
+You can fix this maually by going to "Edit > Render Pipeline > Universal Render Pipeline > Upgrade Project Materials to UniversalRP Materials"
+4. Open the "Project" Window
+5. Create a new URP Pipeline Asset, by selecting "RightClick > Create > Rendering > Universal Render Pipeline > Pipeline Asset (Forward Renderer)"
+You can rename this file if you want to
+6. Open "Project Preferences"
+7. Navigate to the "Graphics" tab
+8. Look for the field that says "Scriptable Render Pipeline Settings"
+9. Assign your newly created "URP Pipeline Asset" here

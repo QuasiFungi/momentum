@@ -1,0 +1,57 @@
+* Code Monkey : www.youtube.com/c/CodeMonkeyUnity
+[input system]
+How to use NEW Input System Package! (Unity Tutorial - Keyboard, Mouse, Touch, Gamepad) : www.youtube.com/watch?v=Yjee_e4fICc
+
+* samyam : www.youtube.com/c/samyam
+[input system and events]
+Swipe Detection + Trail Effect w/ New Input System - Unity Tutorial : www.youtube.com/watch?v=XUx_QlJpd0M
+
+* SpeedTutor : www.youtube.com/c/SpeedTutor
+[door/fan animation]
+OPENING a DOOR in UNITY on TRIGGER : www.youtube.com/watch?v=tJiO4cvsHAo
+
+* chris's tutorials : www.youtube.com/c/ChrisTutorialsYT
+[animation states]
+Animated 2D Door Open Close on Trigger | Unity Tutorial with Example / Scripts : www.youtube.com/watch?v=_NgYujxq13U
+
+* GameDevChef : www.youtube.com/c/GameDevChef
+[trolley movement]
+Simple Car Controller in Unity Tutorial : www.youtube.com/watch?v=Z4HA8zJhGEk
+
+* Gabriel Aguiar Prod. : www.youtube.com/c/GabrielAguiarProd
+[explosion effect]
+Unity 2018 - Game VFX - Shatter / Destroy / Explode Objects Tutorial : www.youtube.com/watch?v=w4aMtKeD2w4
+[window shader]
+Unity Shader Graph - Glowing Crystals Tutorial : www.youtube.com/watch?v=1GPvI-5bOSk
+
+* Specoolar : www.youtube.com/c/Specoolar
+[conveyor belt movement]
+Physically accurate conveyors in Unity : www.youtube.com/watch?v=hC1QZ0h4oco
+
+* Jimmy Vegas : www.youtube.com/c/JimmyVegasUnity
+[conveyor belt and signal display texture animation]
+Mini Unity Tutorial - How To Animate Scroll Textures - Beginners Tutorial : www.youtube.com/watch?v=auVq3TSz20o
+
+* BLANKdev : www.youtube.com/c/BLANKdev
+[swipe gesture feedback]
+How To Draw a Line in Unity | Line Renderer Tutorial 1 : www.youtube.com/watch?v=5ZBynjAsfwI
+
+* Haioner : www.youtube.com/channel/UC5lrWJcF8j6byRt5Hh-u_tg
+[explosion and brake effects]
+Unity Tutorial - Shockwave Effect : www.youtube.com/watch?v=8DmrfVeck0M
+
+* The Game Guy : www.youtube.com/c/TheGameGuy
+[skybox used in this demo]
+How to make a Gradient Skybox with Stars in Unity | Shader Graph Unity : www.youtube.com/watch?v=yw2J9NWRdow
+
+* Tyler Wissler : www.youtube.com/channel/UCI_KwX0k_XGbNmqPou8ryzw
+[dust particle effect]
+Unity's Shuriken Particle System: Meshes : www.youtube.com/watch?v=pCmlu4ag70g
+
+* Mirza : www.youtube.com/c/MirzaBeig
+[spark, shard and splinter particle effects]
+Unity VFX - Electric Sparks (Tutorial) : www.youtube.com/watch?v=HV3g--GyEW0
+
+* DucVu FX : www.youtube.com/c/DucVuFX
+[dash particle effect]
+Unity Game Effect Tutorial - 3D Mesh For Particle : www.youtube.com/watch?v=4-h5QaYJ7Co

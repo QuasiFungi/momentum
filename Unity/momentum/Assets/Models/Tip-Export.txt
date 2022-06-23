@@ -1,0 +1,17 @@
+Preparing an Object for Export into Unity:
+1. It's easier to have a Collection per Object type
+2. Prepend all of the Object's parts with "collectionName_", for consistency
+3. Select all the finished Objects
+4. Press Alt+G to reset their Origins to the World Center
+5. In Object Mode
+6. Rotate by 90 on X axis
+7. Enter Edit Mode
+8. Eotate by -90 on X axis
+9. Export selected Mesh/Armature as FBX
+10. Name the file same as the Collection
+
+Notes:
+- Do the same X Rotations for the Armature
+- Leave all Bones with the default Rotation/Position unless doing so for Animation
+- Make sure the Object Origin is same as the Bone Origin
+- This does not fix the Object's Scale which is still broken...

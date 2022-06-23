@@ -1,0 +1,32 @@
+Creating a Fractured version of an Object:
+1. Open the "Blender" version with the "Fracture Modifier"
+2. Create a new "Project" and Delete everything in it
+3. Import the Model's FBX file
+4. Select the Object and navigate to the "Physics" properties
+5. Click the "Fracture" button
+6. Minimize the sections we wont use,
+	Fracture Constraint Settings
+	Fracture Animated Mesh Settings
+7. For hollow objects like crates,
+Set the "Fracture Algorithm" to "Voronoi + Bisect"
+8. Hit "Execute Fracture"
+Switch to "Wireframe Mode" to visualize the fractures
+9. Minimize the sections we wont use,
+	Rigid Body
+	Rigid Body Trigger Advanced
+	Rigid Body Collisions
+	Rigid Body Dynamics
+10. Hit "Convert to Objects"
+11. Press Ctrl + I
+12. Press X and "Delete" the original mesh
+13. For hollow objects,
+Select any one fragment
+Navigate to the "Modifier" properties
+Add a "Solidify" modifier
+Set the "Thickness" to Zero to reduce the face count
+Hit A twice to "Select" all fragments
+Press Ctrl + L to "Make Links", between the last selected object and all other fragments
+Select "Modifier"
+14. With all objects Selected
+15. Export as FBX
+Name the file "objectName-fractured" for consistency
