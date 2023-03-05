@@ -1,3 +1,18 @@
+--- Devlog02 ---
+* Code Monkey : www.youtube.com/c/CodeMonkeyUnity
+[object damage flash]
+Sprint Tint - 2D Shader Graph Tutorial : www.youtube.com/watch?v=93jnsgD-8Wo
+
+* Unity Ace : www.youtube.com/@UnityAce
+[glass shader]
+How to make Glass in Unity 2021 : www.youtube.com/watch?v=aAY97WduER4
+
+* SpeedTutor : www.youtube.com/c/SpeedTutor
+[collision particle sprites]
+Multiple Sprites With One Particle System | Unity Tutorial : nv58IcIhfmA
+
+--- Devlog01 ---
+
 * Code Monkey : www.youtube.com/c/CodeMonkeyUnity
 [input system]
 How to use NEW Input System Package! (Unity Tutorial - Keyboard, Mouse, Touch, Gamepad) : www.youtube.com/watch?v=Yjee_e4fICc

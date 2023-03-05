@@ -9,8 +9,10 @@ public class controller_player : MonoBehaviour
     public static controller_player Instance;
     // reference to physics component of player
     private Rigidbody _rb;
-    // temporary, the longest distance for a swipe to be detected, longer swipes are scaled down
-    private float _sensitivityDash = 100f;
+    // temporary, the longest distance for a swipe to be detected, longer swipes are scaled down ? use global constants
+    private float _sensitivityDash = 50f;
+    // temporary, the longest distance for a brake to be detected, longer inputs are ignored ? use global constants
+    private float _sensitivityBrake = 50f;
     // the amount of force with which the player dashes
     private float _speedDash = 15f;
     // the rate of speed reduction when braking
@@ -31,6 +33,24 @@ public class controller_player : MonoBehaviour
     private float _thresholdEffect = 10f;
     // * for devlog only *
     public bool _isDemo = false;
+    // reference to the trail renderer component ? should be private or protected
+    public TrailRenderer _trail = null;
+    // for recording the current player velocity at the start of each physics update cycle
+    private Vector3 _cacheVelocity = Vector3.zero;
+    // time frame for stall mechanic to be triggered
+    private float _timeStall = 1f;
+    // time passed since stall mechanic became valid
+    private float _timerStall = 0f;
+    // to make sure that the stall mechanic is used once per valid condition, true means unused
+    private bool _flagStall = true;
+    // time frame for boost mechanic to be triggered
+    private float _timeBoost = 1f;
+    // time passed since boost mechanic became valid
+    private float _timerBoost = 0f;
+    // the amount of force with which the player dashes when the boost mechanic is triggered
+    private float _speedDashBoost = 20f;
+    // the rate of rotation when using the steer mechanic
+    private float _speedSteer = 1f;
     // (built-in function) first function called on object initialized/spawned
     void Awake()
     {
@@ -59,6 +79,8 @@ public class controller_player : MonoBehaviour
     // (built-in function) executed when Unity updates all physics objects in the scene
     void FixedUpdate()
     {
+        // * testing momemtum preserve *
+        _cacheVelocity = Velocity;
         // * for devlog only *
         if (Input.GetKey("w")) _rb.AddForce(Vector3.up * _speedDash);
         if (Input.GetKey("s")) _rb.AddForce(Vector3.down * _speedDash);
@@ -67,7 +89,7 @@ public class controller_player : MonoBehaviour
         // limit the current player speed if it exceeds the provided terminal speed
         if (Speed > _speedTerminal) _rb.velocity = Direction * _speedTerminal;
         // if braking, apply reduction to player speed
-        if (_isHold) AddDrag(_dragBrake);
+        if (_effectBrake.activeSelf) AddDrag(_dragBrake);
         // constantly reduce player speed to simulate air/surface friction
         if (Speed > 0f) _rb.velocity -= Direction * _drag * Time.fixedDeltaTime;
     }
@@ -78,8 +100,52 @@ public class controller_player : MonoBehaviour
         if (Speed < _drag * Time.deltaTime) _rb.velocity = Vector3.zero;
         // * for devlog only *
         if (!_isDemo)
-        // enable/disable brake effect based on whether brake input detected or not
-        _effectBrake.SetActive(_isHold);
+        // enable/disable brake effect based on whether brake input detected and pointer in brake radius
+        _effectBrake.SetActive(_isHold && (manager_input.Instance.PositionDrag - manager_input.Instance.PositionPress).magnitude < _sensitivityBrake);
+        // tick stall mechanic timer if active
+        if (_timerStall > 0f) _timerStall -= Time.deltaTime;
+        // tick boost mechanic timer if active
+        if (_timerBoost > 0f) _timerBoost -= Time.deltaTime;
+        // currently braking
+        if (_effectBrake.activeSelf)
+        {
+            // using stall mechanic is possible
+            if (_flagStall)
+            {
+                // set the stall timer
+                _timerStall = _timeStall;
+                // mark stall as having been attempted
+                _flagStall = false;
+                // mark conditions as invalid for the boost mechanic
+                _timerBoost = 0f;
+            }
+        }
+        // stall mechanic already attempted
+        else if (!_flagStall)
+        {
+            // reset the stall mechanic timer
+            _timerStall = 0f;
+            // mark stall mechanic as usable
+            _flagStall = true;
+            // condition is valid for the boost mechanic
+            _timerBoost = _timeBoost;
+        }
+        // calculate pointer displacement between press and current to determine drag direction
+        Vector3 direction = manager_input.Instance.PositionDrag - manager_input.Instance.PositionPress;
+        // convert displacement into rotation in degrees along the forward axis
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        // subtract the brake vector from the displacement
+        direction -= direction.normalized * _sensitivityBrake;
+        // scale down displacement based on dash input sensitivity
+        direction /= _sensitivityDash;
+        // cap maximum drag distance to 1 meaning a full drag
+        if (direction.magnitude > 1f) direction = direction.normalized;
+        // configure the touch input display to the current input status
+        feedback_touch.Instance.SetDrag(!_effectBrake.activeSelf, angle, direction.magnitude);
+        // valid conditions for the steer mechanic
+        if (_isHold && !_effectBrake.activeSelf && Speed > 0f)
+            // rotate the current velocity based on drag direction and steer speed
+            Velocity = Vector3.RotateTowards(Direction, direction.normalized, _speedSteer * Time.deltaTime, 0f) * Speed;
     }
     // executed when brake input detected by input manager
     public void Brake()
@@ -92,18 +158,24 @@ public class controller_player : MonoBehaviour
     {
         // calculate pointer displacement between press and release to determine swipe direction
         Vector2 direction = manager_input.Instance.PositionDrag - manager_input.Instance.PositionPress;
-        // scale down displacement based on input sensitivity
-        direction /= _sensitivityDash;
-        // (memory vs computation) cache calculated distance in local variable for reuse
-        float distance = direction.magnitude;
-        // cap maximum swipe distance to 1 meaning a full powered dash, a lower value means a weaker dash
-        if (distance > 1f) direction = direction.normalized;
-        // * for devlog only *
-        if (!_isDemo)
-        // spawn dash effect if calculated dash speed is above threshold, measured relative to dash speed (vs current speed)
-        if (distance * _speedDash >= _thresholdEffect) Instantiate(_effectDash, _rb.position, Quaternion.LookRotation(direction));
-        // execute dash, apply force in swipe direction scaled to dash speed
-        AddForce(direction * _speedDash);
+        // check if pointer is outside brake radius, ignore dash otherwise
+        if (direction.sqrMagnitude > (direction.normalized * _sensitivityBrake).sqrMagnitude)
+        {
+            // calculate pointer displacement from outside brake radius
+            direction -= direction.normalized * _sensitivityBrake;
+            // scale down displacement based on dash input sensitivity
+            direction /= _sensitivityDash;
+            // (memory vs computation) cache calculated distance in local variable for reuse
+            float distance = direction.magnitude;
+            // cap maximum swipe distance to 1 meaning a full powered dash, a lower value means a weaker dash
+            if (distance > 1f) direction = direction.normalized;
+            // * for devlog only *
+            if (!_isDemo)
+            // spawn dash effect if calculated dash speed is above threshold, measured relative to dash speed (vs current speed)
+            if (distance * _speedDash >= _thresholdEffect) Instantiate(_effectDash, _rb.position, Quaternion.LookRotation(direction));
+            // execute dash, apply force in swipe direction scaled to the dash or boost speed
+            AddForce(direction * (_timerBoost > 0f ? _speedDashBoost : _speedDash));
+        }
         // mark brake as ended
         _isHold = false;
     }
@@ -135,23 +207,41 @@ public class controller_player : MonoBehaviour
             else if (other.transform.tag == "Wood")
                 Instantiate(game_variables.Instance.ParticleSplinter, other.contacts[0].point, Quaternion.FromToRotation(Vector3.up, other.contacts[0].normal));
         }
+        // get the collided objects rigidbody
+        Rigidbody rb = other.transform.GetComponent<Rigidbody>();
+        // object is a valid recipent for stall mechanic to be triggered
+        if (rb && !rb.isKinematic && _timerStall > 0f)
+        {
+            // apply current player momentum onto the colliding object
+            rb.AddForce(_cacheVelocity * Mass);
+            // halt player movement
+            Velocity = Vector3.zero;
+        }
         // no damage if slow ? consider direction
-        if (Speed < 1f) return;
+        if (SpeedCache < 1f) return;
         // apply damage if collided object is of type breakable (defined via layers)
         if (other.gameObject.layer == game_variables.Instance.LayerBreakable)
-            other.transform.GetComponent<base_breakable>()?.ModifyHealthInst(-_damage * Mass * Speed);
+        {
+            // get the colliding objects component that handles custom collision mechanics
+            base_breakable temp = other.transform.GetComponent<base_breakable>();
+            // if the object is destroyed on impact, reapply the players velocity from the last physics update cycle (preserve momentum)
+            if (temp && temp.ModifyHealthInst(-_damage * Mass * SpeedCache) && Speed > 0f) Velocity = _cacheVelocity;
+        }
     }
     // regions are good for organization since they can be minimzed and make it easier to read lengthy code
     #region Properties
-    // shorthand, used internally for calculations
-    private float Speed
+    // shorthand, used for calculations
+    public float Speed
     {
         get { return _rb.velocity.magnitude; }
     }
     // shorthand, used internally for calculations
-    private float Mass
+    // * public for devlog only *
+    public float Mass
     {
         get { return _rb.mass; }
+        // * for devlog only *
+    	set { _rb.mass = value; }
     }
     // shorthand, used internally for calculations
     private Vector3 Direction
@@ -162,6 +252,69 @@ public class controller_player : MonoBehaviour
     public Vector3 Position
     {
         get { return _rb.position; }
+    }
+    // * for devlog only *
+    public float SpeedDash
+    {
+    	set { _speedDash = value; }
+    }
+    public float SpeedTerminal
+    {
+    	set { _speedTerminal = value; }
+    }
+    public float DragBrake
+    {
+    	set { _dragBrake = value; }
+    }
+    public float Size
+    {
+    	set { transform.localScale = Vector3.one * value; }
+    }
+    public float Trail
+    {
+    	set { _trail.time = value; }
+    }
+    public float Damage
+    {
+    	set { _damage = value; }
+    }
+    public float Drag
+    {
+    	set { _drag = value; }
+    }
+    private Vector3 Velocity
+    {
+        get { return _rb.velocity; }
+        set { _rb.velocity = value; }
+    }
+    private float SpeedCache
+    {
+        get { return _cacheVelocity.magnitude; }
+    }
+    public float Stall
+    {
+    	set { _timeStall = value; }
+    }
+    public float Boost
+    {
+    	set { _timeBoost = value; }
+    }
+    public float Steer
+    {
+    	set { _speedSteer = value; }
+    }
+    public float SensitivityBrake
+    {
+        get { return _sensitivityBrake; }
+        set { _sensitivityBrake = value; }
+    }
+    public float SensitivityDash
+    {
+        set { _sensitivityDash = value; }
+    }
+    public float SpeedBoost
+    {
+    	set { _speedDashBoost = value; }
     }
     #endregion
 }

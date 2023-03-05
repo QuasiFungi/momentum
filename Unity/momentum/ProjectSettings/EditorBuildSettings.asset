@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Devlog01-LevelTest.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Devlog02-LevelBox.unity
+    guid: 5378fb1f14f1a109cbff79af9fa106d3
+  - enabled: 1
+    path: Assets/Scenes/Devlog02-LevelSprint.unity
+    guid: 61cb741161cccefdeb01f3004cbda827
   m_configObjects: {}

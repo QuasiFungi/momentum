@@ -1,0 +1,20 @@
+Devlog02 - 23/02/25
+Added:
++ advanced maneuvers : stall, boost and steer
++ parameter settings menu with save/load/reset feature
++ added level box and level sprint
++ objects now flash on recieve damage
++ placeholder display for damage amount
++ simple material for triggers
+Modified:
+~ revamped controls - brake and dash now mutually exclusive
+~ slightly improved impact particles
+~ background material with simple tiled texture
+~ glass shader changed
+
+Devlog01 - 22/06/24
+Added:
++ player character with basic maneuvers : brake and dash
++ test level with variety of interactive and breakable objects
++ placeholder touch input UI
++ cursed audio cause copyright

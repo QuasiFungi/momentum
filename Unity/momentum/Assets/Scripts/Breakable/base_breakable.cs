@@ -19,31 +19,61 @@ public class base_breakable : MonoBehaviour
     [Tooltip("Use parent rotation")] public bool _parentRotationFracture = false;
     // optional effect to spawn when object destroyed (like an explosion for barrels)
     [Tooltip("Optional destroy effect")] public GameObject _effectDestroy = null;
+    // reference to the material used by this object
+    private Material _material;
+    // for keeping track of the material color as it flashes white
+    private Color _tintColor;
+    // determines how quickly the white fades away, larger values means shorter flash
+    private float _tintFadeSpeed = 4f;
     // (built-in function) first function called on object initialized/spawned
     void Awake()
     {
         // mark current health as full
         _healthInst = _health;
-        // maximum movement speed limited to 50 units per second
+        // maximum movement speed limited to 50 units per second ? use global constant
         _speedTerminal = 50f;
         // store reference to object's rigidbody component that handles physics
         _rb = GetComponent<Rigidbody>();
+        // get reference to material instance used by this object
+        _material = GetComponent<MeshRenderer>().material;
+        // if the material uses the flash effect shader, get its default tint color otherwise use any color with the alpha set to zero
+        _tintColor = _material.HasProperty("_Tint") ? _material.GetColor("_Tint") : new Color(0f, 0f, 0f, 0f);
     }
     // (built-in function) executed every frame
     void Update()
     {
+        // if the damage tint is showing
+        if (_tintColor.a > 0f)
+        {
+            // fade out the color transparency slightly
+            _tintColor.a = Mathf.Clamp01(_tintColor.a - _tintFadeSpeed * Time.deltaTime);
+            // apply the updated tint color
+            _material.SetColor("_Tint", _tintColor);
+        }
         // this object does not move
         if (!_rb) return;
-        // cap current movement speed if it exceeds specified limit
+        // cap current movement speed if it exceeds specified limit ? use global constant
         if (Speed > _speedTerminal) _rb.velocity = _rb.velocity.normalized * _speedTerminal;
     }
-    // called by other objects that collide with this object, like the player
-    public void ModifyHealthInst(float value)
+    // called by other objects that collide with this object, like the player, returns true if object health reaches zero
+    public bool ModifyHealthInst(float value)
     {
         // apply received change to current health
         _healthInst = Mathf.Clamp(_healthInst + value, 0f, _health);
+        // register the damage amount to the damage display indicator
+        feedback_damage.Instance.Register(transform, value);
+        // make the damage flash visible
+        _tintColor.a = 1f;
         // object is damaged enough to break
-        if (_healthInst <= 0f) Destroy();
+        if (_healthInst <= 0f)
+        {
+            // destroy this object
+	        Destroy();
+	        // inform the belligerent of their success
+	        return true;
+	    }
+        // inform the belligerent of their failure
+	    return false;
     }
     // called by external events, like an explosion
     public void AddForce(Vector3 force)
