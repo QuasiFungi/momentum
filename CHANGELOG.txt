@@ -1,20 +1,53 @@
-Devlog02 - 23/02/25
-Added:
-+ advanced maneuvers : stall, boost and steer
++ added
+~ modified
+
+---
+
+Devlog03 - 23/03/?? - Health & Death
++ level maze
++ option to clear best time
++ option to delete all saved data
++ player collision counter
++ visual effect: boost and stall mechanic
++ damage decal: crate, barrel
++ player: health, damage, death
++ menu death
++ feedback health: show object health on damage
+~ build: landscape mode only
+~ player controls disabled on pause
+~ parameter names: size brake, speed boost
+~ parameter sliders: brake, damage, stall, boost, steer
+~ parameter defaults: speed, brake, stall, boost, size dash, speed boost
+~ stall mechanic: use speed from brake start
+~ boost mechanic: charge on brake, add to dash speed, discharge on brake release
+~ organized shaders and materials
+~ trigger response on enter and exit
+~ interactive: fan force reduce
+~ visual effect: brake mechanic
+~ health: divided into cells, non-empty regenerate after delay, optional behaviour on critical health
+~ collision particle effect: spark
+
+Devlog02 - 23/02/25 - Depth In Movement
++ player movement mechanics, advanced maneuvers: stall, boost and steer
 + parameter settings menu with save/load/reset feature
-+ added level box and level sprint
-+ objects now flash on recieve damage
-+ placeholder display for damage amount
++ level box and level sprint
++ objects now flash on recieving damage
++ placeholder display for damage amounts
 + simple material for triggers
-Modified:
 ~ revamped controls - brake and dash now mutually exclusive
 ~ slightly improved impact particles
+~ scale accurate touch input UI
 ~ background material with simple tiled texture
-~ glass shader changed
+~ glass shader translucent
+~ audio source: muted by default
 
-Devlog01 - 22/06/24
-Added:
-+ player character with basic maneuvers : brake and dash
-+ test level with variety of interactive and breakable objects
+Devlog01 - 22/06/24 - A Warm Boot
++ player character with basic maneuvers: brake and dash
 + placeholder touch input UI
 + cursed audio cause copyright
++ level dummy and level test
++ surface type: concrete, metal, wood, glass
++ collision particle effect: dust, spark, splinter, shard
++ interactive: button, conveyorBelt, dispenser, doorFree, doorPowered, elevator, fan, switch, trampoline, trolley, windupPress, windupTurn
++ breakable: crate, barrel, window
++ reactive: display
