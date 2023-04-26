@@ -64,6 +64,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: f54c4d02759fb72b29b11e8dff77b24e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f54c4d02759fb72b29b11e8dff77b24e, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f54c4d02759fb72b29b11e8dff77b24e, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 83ee547f04f6559b1a854fe52576e65b, type: 2}
@@ -116,7 +124,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1490014688594724021, guid: f54c4d02759fb72b29b11e8dff77b24e, type: 3}
---- !u!114 &2079954345
+--- !u!114 &-5032346425061500912
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,11 +133,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 6586059420921893444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92052fa1fd8ff84179f0cdde1d5f3eaa, type: 3}
+  m_Script: {fileID: 11500000, guid: a9d2c512e741693b8b86d29649ca9360, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 1
+  _cells: 2
+  _rateRegen: 1
+  _timeRegen: 1
   _fracture: {fileID: 1185001670650438912, guid: 19bc12a0e32a6f46bbc6cd8a375e5acc, type: 3}
   _rotationFracture: {x: 0, y: 0, z: 0}
   _parentRotationFracture: 1
   _effectDestroy: {fileID: 0}
+  _offset: {x: 0.5, y: 0}

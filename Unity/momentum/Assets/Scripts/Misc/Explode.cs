@@ -44,8 +44,8 @@ public class Explode : MonoBehaviour
                 rb.AddExplosionForce(Random.Range(_forceMin, _forceMax), transform.position, _radius);
                 // if explosion can damage objects
                 if (_damage == 0f) continue;
-                // and if object is of type breakable
-                if (collider.gameObject.layer == game_variables.Instance.LayerBreakable)
+                // and if object is of type breakable or player ? why separate layer
+                if (collider.gameObject.layer == game_variables.Instance.LayerBreakable || collider.gameObject.layer == game_variables.Instance.LayerPlayer)
                     // apply damage, scaling it weaker for objects further away
                     collider.transform.GetComponent<base_breakable>()?.ModifyHealthInst(-_damage * (1f - (rb.position - transform.position).magnitude / _radius));
             }

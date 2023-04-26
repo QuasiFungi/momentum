@@ -83,6 +83,8 @@ public class manager_input : MonoBehaviour
         _positionDrag.z = _camera.nearClipPlane;
         // start recording the input drag position
         _isTouch = true;
+        // ignore events if game paused or player dead
+        if (Time.timeScale == 0f || !controller_player.Instance) return;
         // trigger the brake event if there are any subscribers to it
         if (OnStartBrake != null) OnStartBrake();
     }
@@ -91,6 +93,8 @@ public class manager_input : MonoBehaviour
     {
         // stop recording the input drag position
         _isTouch = false;
+        // ignore events if game paused or player dead
+        if (Time.timeScale == 0f || !controller_player.Instance) return;
         // trigger the dash event if there are any subscribers to it
         if (OnStartDash != null) OnStartDash();
     }

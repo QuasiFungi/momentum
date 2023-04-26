@@ -51,13 +51,61 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8647484784847094910, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8647484784847094910, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8642207756282203586, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8642207756282203586, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8566544774658170396, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8566544774658170396, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7602892743954979482, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7602892743954979482, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -7420781731965120472, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -5185321568022055686, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -5185321568022055686, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_TagString
       value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: -4636786103778521811, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4636786103778521811, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3609177285224493657, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3609177285224493657, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_TagString
@@ -68,24 +116,52 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2191590038029005529, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2191590038029005529, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_TagString
       value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: -2190352754538577797, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -2190352754538577797, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_TagString
       value: Metal
       objectReference: {fileID: 0}
     - target: {fileID: -1966297474174535147, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1966297474174535147, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_TagString
       value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: -1403902383082951922, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1403902383082951922, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_TagString
       value: Metal
       objectReference: {fileID: 0}
+    - target: {fileID: -985473454856559252, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -985473454856559252, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_Name
       value: barrel-fractured
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_TagString
@@ -104,6 +180,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1661730334327213475, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661730334327213475, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_TagString
       value: Metal
       objectReference: {fileID: 0}
@@ -112,8 +192,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3023679944300818856, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3023679944300818856, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_TagString
       value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 3235205667255533991, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3235205667255533991, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_TagString
@@ -132,8 +220,44 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6654117253913001442, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6654117253913001442, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_TagString
       value: Metal
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831351615185807037, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831351615185807037, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063493305260399511, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063493305260399511, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834336282924203541, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834336282924203541, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937982979646322571, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8937982979646322571, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
+      propertyPath: m_LightProbeUsage
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9192986397131234693, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}
       propertyPath: m_Convex
@@ -226,7 +350,6 @@ MonoBehaviour:
   _radius: 5
   _isExternal: 1
   _damage: 2
-  _skipFrames: 1
 --- !u!1 &4491082935966671079 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1661730334327213475, guid: 3b86453b07441d185a2777e3e8f7711a, type: 3}

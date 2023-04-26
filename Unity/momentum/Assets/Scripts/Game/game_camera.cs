@@ -37,8 +37,11 @@ public class game_camera : MonoBehaviour
         // lock camera to player position at a fixed distance away from them
         // if (controller_player.Instance) transform.position = controller_player.Instance.Position - Vector3.forward * _distance;
     	// * for devlog only *
-    	transform.position = new Vector3(_distanceX, _distanceY, _distance);
-    	if (_isFollow) transform.position += controller_player.Instance.Position;
+    	if (controller_player.Instance)
+    	{
+        	transform.position = new Vector3(_distanceX, _distanceY, _distance);
+        	if (_isFollow) transform.position += controller_player.Instance.Position;
+    	}
     }
     // used by damage amount display for tracking object position
     public Vector2 WorldToScreenPoint(Vector3 position)

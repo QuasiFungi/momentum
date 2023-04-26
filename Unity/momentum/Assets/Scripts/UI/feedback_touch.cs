@@ -1,5 +1,7 @@
 // standard import for all objects that perform behaviours based on Unity's object lifecycle
 using UnityEngine;
+// package used when handling UI components
+using UnityEngine.UI;
 // displays the input pointer's press and drag positions for visualizing expected player movement
 public class feedback_touch : MonoBehaviour
 {
@@ -57,6 +59,8 @@ public class feedback_touch : MonoBehaviour
         // show/hide the drag direction and amount icons
     	_iconDrag.gameObject.SetActive(isDrag);
     	_iconDragAmount.gameObject.SetActive(isDrag);
+    	//
+    	if (!isDrag) return;
     	// rotate the drag direction icon based on the recieved pointer angle
     	_iconDragAnchor.eulerAngles = Vector3.forward * angle;
     	// scale the drag amount icon based on the recieved drag amount

@@ -7,8 +7,9 @@
 ---
 # Overview
 ## Contents
-The two main folders each contain,
+The three main folders each contain,
 * **Blender** - the **Blender Files** for *Models* of various objects used in the project
+* **Build** - the **APK Files** used when testing the game on a phone
 * **Unity** - the **Unity Project Files** for both the *Demonstrations* and *Test Level* shown in the devlog
 ## Structure
 Unity stores all user generated files inside the **Assets** folder.

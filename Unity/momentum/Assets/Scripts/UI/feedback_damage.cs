@@ -2,8 +2,6 @@
 using UnityEngine;
 // required when accessing UI elements in code
 using UnityEngine.UI;
-// ? i forgot
-using System.Collections;
 // package that allows access to generic lists datatype
 using System.Collections.Generic;
 // displays damage inflicted on objects as numbers on screen
@@ -114,7 +112,7 @@ public class feedback_damage : MonoBehaviour
         // empty the display discard list
         _toRemove.Clear();
     }
-    // used by objects to register themselves when hurt
+    // used by objects to register themselves when hurt ? prefix suffix
     public void Register(Transform source, float value, float timer = -1f)
     {
         // check all existing damage displays

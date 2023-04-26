@@ -11,13 +11,13 @@ public class menu_settings : MonoBehaviour
     private float mass = 1;
     public Slider control_speed = null;
     public Text value_speed = null;
-    private float speed = 15;
+    private float speed = 10;
     public Slider control_terminal = null;
     public Text value_terminal = null;
     private float terminal = 30;
     public Slider control_brake = null;
     public Text value_brake = null;
-    private float brake = .2f;
+    private float brake = 1f;
     public Slider control_size = null;
     public Text value_size = null;
     private float size = 1;
@@ -29,10 +29,10 @@ public class menu_settings : MonoBehaviour
     private float damage = .1f;
     public Slider control_stall = null;
     public Text value_stall = null;
-    private float stall = 1f;
+    private float stall = .5f;
     public Slider control_boost = null;
     public Text value_boost = null;
-    private float boost = 1f;
+    private float boost = .3f;
     public Slider control_steer = null;
     public Text value_steer = null;
     private float steer = 1f;
@@ -41,10 +41,10 @@ public class menu_settings : MonoBehaviour
     private float sizeBrake = 50f;
     public Slider control_sizeDash = null;
     public Text value_sizeDash = null;
-    private float sizeDash = 50f;
+    private float sizeDash = 200f;
     public Slider control_speedBoost = null;
     public Text value_speedBoost = null;
-    private float speedBoost = 20f;
+    private float speedBoost = 10f;
     //
     public Slider control_drag = null;
     public Text value_drag = null;
@@ -71,20 +71,20 @@ public class menu_settings : MonoBehaviour
     public Text value_posZ = null;
     private float posZ = -20;
     public Dropdown control_fps = null;
-    private int fps = 0;
+    private int fps = 1;
     void Awake()
     {
         // assiging a function to be called each time the value for a particular setting is changed
         control_mass.onValueChanged.AddListener(delegate{ChangedSlider(control_mass, value_mass);});
         control_speed.onValueChanged.AddListener(delegate{ChangedSlider(control_speed, value_speed);});
         control_terminal.onValueChanged.AddListener(delegate{ChangedSlider(control_terminal, value_terminal);});
-        control_brake.onValueChanged.AddListener(delegate{ChangedSlider(control_brake, value_brake);});
+        control_brake.onValueChanged.AddListener(delegate{ChangedSlider(control_brake, value_brake, "F1", .1f);});
         control_size.onValueChanged.AddListener(delegate{ChangedSlider(control_size, value_size);});
         control_trail.onValueChanged.AddListener(delegate{ChangedSlider(control_trail, value_trail);});
-        control_damage.onValueChanged.AddListener(delegate{ChangedSlider(control_damage, value_damage);});
-        control_stall.onValueChanged.AddListener(delegate{ChangedSlider(control_stall, value_stall);});
-        control_boost.onValueChanged.AddListener(delegate{ChangedSlider(control_boost, value_boost);});
-        control_steer.onValueChanged.AddListener(delegate{ChangedSlider(control_steer, value_steer);});
+        control_damage.onValueChanged.AddListener(delegate{ChangedSlider(control_damage, value_damage, "F1", .1f);});
+        control_stall.onValueChanged.AddListener(delegate{ChangedSlider(control_stall, value_stall, "F1", .1f);});
+        control_boost.onValueChanged.AddListener(delegate{ChangedSlider(control_boost, value_boost, "F1", .1f);});
+        control_steer.onValueChanged.AddListener(delegate{ChangedSlider(control_steer, value_steer, "F1", .1f);});
         control_sizeBrake.onValueChanged.AddListener(delegate{ChangedSlider(control_sizeBrake, value_sizeBrake);});
         control_sizeDash.onValueChanged.AddListener(delegate{ChangedSlider(control_sizeDash, value_sizeDash);});
         control_speedBoost.onValueChanged.AddListener(delegate{ChangedSlider(control_speedBoost, value_speedBoost);});
@@ -101,10 +101,10 @@ public class menu_settings : MonoBehaviour
         ParametersReset();
     }
     // handles what to do when the value of a slider changes
-    public void ChangedSlider(Slider control, Text value)
+    public void ChangedSlider(Slider control, Text value, string unit = "F0", float scale = 1f)
     {
         // update the displayed value for this settings option on the screen
-        value.text = control.value.ToString();
+        value.text = (control.value * scale).ToString(unit);
     }
     // built-in function called each time this gameObject is shown
     void OnEnable()
@@ -141,8 +141,8 @@ public class menu_settings : MonoBehaviour
         control_terminal.value = terminal;
         value_terminal.text = terminal.ToString();
         //--brake
-        control_brake.value = brake;
-        value_brake.text = brake.ToString();
+        control_brake.value = brake * 10f;
+        value_brake.text = brake.ToString("F1");
         //--size
         control_size.value = size;
         value_size.text = size.ToString();
@@ -150,17 +150,17 @@ public class menu_settings : MonoBehaviour
         control_trail.value = trail;
         value_trail.text = trail.ToString();
         //--damage
-        control_damage.value = damage;
-        value_damage.text = damage.ToString();
+        control_damage.value = damage * 10f;
+        value_damage.text = damage.ToString("F1");
         //--stall
-        control_stall.value = stall;
-        value_stall.text = stall.ToString();
+        control_stall.value = stall * 10f;
+        value_stall.text = stall.ToString("F1");
         //--boost
-        control_boost.value = boost;
-        value_boost.text = boost.ToString();
+        control_boost.value = boost * 10f;
+        value_boost.text = boost.ToString("F1");
         //--steer
-        control_steer.value = steer;
-        value_steer.text = steer.ToString();
+        control_steer.value = steer * 10f;
+        value_steer.text = steer.ToString("F1");
         //--sizeBrake
         control_sizeBrake.value = sizeBrake;
         value_sizeBrake.text = sizeBrake.ToString();
@@ -202,35 +202,38 @@ public class menu_settings : MonoBehaviour
     private void ParametersApply()
     {
         //player
-        //--mass
-        controller_player.Instance.Mass = control_mass.value;
-        //--speed
-        controller_player.Instance.SpeedDash = control_speed.value;
-        //--terminal
-        controller_player.Instance.SpeedTerminal = control_terminal.value;
-        //--brake
-        controller_player.Instance.DragBrake = control_brake.value;
-        //--size
-        controller_player.Instance.Size = control_size.value;
-        //--trail
-        controller_player.Instance.Trail = control_trail.value;
-        //--damage
-        controller_player.Instance.Damage = control_damage.value;
-        //--stall
-        controller_player.Instance.Stall = control_stall.value;
-        //--boost
-        controller_player.Instance.Boost = control_boost.value;
-        //--steer
-        controller_player.Instance.Steer = control_steer.value;
-        //--sizeBrake
-        controller_player.Instance.SensitivityBrake = control_sizeBrake.value;
-        //--sizeDash
-        controller_player.Instance.SensitivityDash = control_sizeDash.value;
-        //--speedBoost
-        controller_player.Instance.SpeedBoost = control_speedBoost.value;
-        //environment
-        //--drag
-        controller_player.Instance.Drag = control_drag.value;
+        if (controller_player.Instance)
+        {
+            //--mass
+            controller_player.Instance.Mass = control_mass.value;
+            //--speed
+            controller_player.Instance.SpeedDash = control_speed.value;
+            //--terminal
+            controller_player.Instance.SpeedTerminal = control_terminal.value;
+            //--brake
+            controller_player.Instance.DragBrake = control_brake.value * .1f;
+            //--size
+            controller_player.Instance.Size = control_size.value;
+            //--trail
+            controller_player.Instance.Trail = control_trail.value;
+            //--damage
+            controller_player.Instance.Damage = control_damage.value * .1f;
+            //--stall
+            controller_player.Instance.Stall = control_stall.value * .1f;
+            //--boost
+            controller_player.Instance.Boost = control_boost.value * .1f;
+            //--steer
+            controller_player.Instance.Steer = control_steer.value * .1f;
+            //--sizeBrake
+            controller_player.Instance.SensitivityBrake = control_sizeBrake.value;
+            //--sizeDash
+            controller_player.Instance.SensitivityDash = control_sizeDash.value;
+            //--speedBoost
+            controller_player.Instance.SpeedBoost = control_speedBoost.value;
+            //environment
+            //--drag
+            controller_player.Instance.Drag = control_drag.value;
+        }
         //--gravX
         //--gravY
         //--gravZ
@@ -262,8 +265,8 @@ public class menu_settings : MonoBehaviour
         control_terminal.value = PlayerPrefs.GetFloat("terminal", terminal);
         value_terminal.text = control_terminal.value.ToString();
         //--brake
-        control_brake.value = PlayerPrefs.GetFloat("brake", brake);
-        value_brake.text = control_brake.value.ToString();
+        control_brake.value = PlayerPrefs.GetFloat("brake", brake * 10f);
+        value_brake.text = (control_brake.value * .1f).ToString("F1");
         //--size
         control_size.value = PlayerPrefs.GetFloat("size", size);
         value_size.text = control_size.value.ToString();
@@ -271,17 +274,17 @@ public class menu_settings : MonoBehaviour
         control_trail.value = PlayerPrefs.GetFloat("trail", trail);
         value_trail.text = control_trail.value.ToString();
         //--damage
-        control_damage.value = PlayerPrefs.GetFloat("damage", damage);
-        value_damage.text = control_damage.value.ToString();
+        control_damage.value = PlayerPrefs.GetFloat("damage", damage * 10f);
+        value_damage.text = (control_damage.value * .1f).ToString("F1");
         //--stall
-        control_stall.value = PlayerPrefs.GetFloat("stall", stall);
-        value_stall.text = control_stall.value.ToString();
+        control_stall.value = PlayerPrefs.GetFloat("stall", stall * 10f);
+        value_stall.text = (control_stall.value * .1f).ToString("F1");
         //--boost
-        control_boost.value = PlayerPrefs.GetFloat("boost", boost);
-        value_boost.text = control_boost.value.ToString();
+        control_boost.value = PlayerPrefs.GetFloat("boost", boost * 10f);
+        value_boost.text = (control_boost.value * .1f).ToString("F1");
         //--steer
-        control_steer.value = PlayerPrefs.GetFloat("steer", steer);
-        value_steer.text = control_steer.value.ToString();
+        control_steer.value = PlayerPrefs.GetFloat("steer", steer * 10f);
+        value_steer.text = (control_steer.value * .1f).ToString("F1");
         //--sizeBrake
         control_sizeBrake.value = PlayerPrefs.GetFloat("sizeBrake", sizeBrake);
         value_sizeBrake.text = control_sizeBrake.value.ToString();
@@ -370,5 +373,10 @@ public class menu_settings : MonoBehaviour
         PlayerPrefs.SetFloat("posZ", control_posZ.value);
         //--fps
         PlayerPrefs.SetInt("fps", control_fps.value);
+    }
+    // called by the delete button
+    public void ParametersDelete()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }
